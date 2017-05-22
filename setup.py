@@ -3,9 +3,10 @@ import os
 from setuptools import setup
 
 PACKAGE = os.path.basename(os.path.dirname(os.path.abspath(__file__))).replace('-', '_')
-
+print(PACKAGE)
 setup(
     name=PACKAGE,
+    version='0.0.1',
     packages=[PACKAGE],
     test_suite='tests',
     entry_points = {
