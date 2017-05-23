@@ -12,6 +12,6 @@ from builtins import FileExistsError
 #with Python 2 and Python 3
 #Read more at http://python-future.org/compatible_idioms.html
 
-class PythonSkeleton(object):
+class PackageSkel(object):
     def hello(self):
         print('Hello world!')

@@ -11,7 +11,7 @@ test-dependencies: virtualenv
 .PHONY: test
 test: test-dependencies
 	. virtualenv/bin/activate && \
-		make METHOD=git python-pep8 && \
+		#make METHOD=git python-pep8 && \
 		PYTHONPATH=. coverage run setup.py test && \
 		coverage report --include='$(PACKAGE_NAME)/*' --fail-under=100
 

@@ -5,3 +5,4 @@ ordereddict==1.1
 pbr==1.9.1
 pep8==1.7.0
 six==1.10.0
+future

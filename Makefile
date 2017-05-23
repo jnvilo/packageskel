@@ -4,14 +4,19 @@ PACKAGE_NAME = $(subst -,_,$(NAME))
 .PHONY: all
 all: build
 
+virtualenv: 
+	$(SYSTEM_VIRTUALENV) virtualenv
+
 .PHONY: test-dependencies
+
+
 test-dependencies: virtualenv
 	. virtualenv/bin/activate && pip install --requirement requirements.txt || exit $$?; \
 
 .PHONY: test
 test: test-dependencies
 	. virtualenv/bin/activate && \
-		make METHOD=git python-pep8 && \
+		#make METHOD=git python-pep8 && \
 		PYTHONPATH=. coverage run setup.py test && \
 		coverage report --include='$(PACKAGE_NAME)/*' --fail-under=100
 
