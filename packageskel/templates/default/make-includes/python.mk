@@ -8,16 +8,17 @@ endif
 
 BUILD_DIRECTORY ?= build
 
-FIND = /usr/bin/find
-GIT = /usr/bin/git
-LN = /usr/bin/ln
-MAKE = /usr/bin/make
-MKDIR = /usr/bin/mkdir
-PYTHON = /usr/bin/python
-TAR = /usr/bin/tar
+FIND = `which find`
+GIT = `/usr/bin/git`
+LN = `which ln`
+MAKE = `which make`
+MKDIR = `which mkdir`
+PYTHON = `which python`
+TAR = `which tar` 
 VENV = /usr/bin/virtualenv
 WGET = /usr/bin/wget $(WGET_OPTIONS)
 XARGS = /usr/bin/xargs
+
 
 # Use METHOD=git to check only files in the Git index or working tree
 METHOD = find
