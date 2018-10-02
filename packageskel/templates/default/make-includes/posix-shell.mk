@@ -1,7 +1,7 @@
 # Use METHOD=git to check only files in the Git index or working tree
 FIND = /usr/bin/find
 GIT = /usr/bin/git
-SH = /usr/bin/sh
+SH = /bin/bash 
 XARGS = /usr/bin/xargs
 
 METHOD = find

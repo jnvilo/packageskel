@@ -8,16 +8,19 @@ endif
 
 BUILD_DIRECTORY ?= build
 
-FIND = `which find`
-GIT = `/usr/bin/git`
-LN = `which ln`
-MAKE = `which make`
+FIND = /usr/bin/find
+GIT = /usr/bin/git
+LN = /bin/ln
+MAKE = /usr/bin/make
 MKDIR = `which mkdir`
-PYTHON = `which python`
-TAR = `which tar` 
+PYTHON = /usr/local/bin/python
+TAR = `which tar`
 VENV = /usr/bin/virtualenv
-WGET = /usr/bin/wget $(WGET_OPTIONS)
+WGET = /usr/local/bin/wget  $(WGET_OPTIONS)
 XARGS = /usr/bin/xargs
+
+CPPFLAGS="-I$(brew --prefix openssl)/include" 
+LDFLAGS="-L$(brew --prefix openssl)/lib" 
 
 
 # Use METHOD=git to check only files in the Git index or working tree
@@ -28,7 +31,8 @@ else ifeq ($(METHOD),find)
 	python_files_run = $(FIND) . -type f -name '*.py' -exec printf '%s\0' {} + | $(XARGS) -0
 endif
 
-PYTHON_VERSION ?= $(shell $(PYTHON) --version | cut -d ' ' -f 2 | cut -d '.' -f 1-3)
+#PYTHON_VERSION ?= $(shell $(PYTHON) --version | cut -d ' ' -f 2 | cut -d '.' -f 1-3)
+PYTHON_VERSION=3.7.0
 PYTHON_NAME ?= Python-$(PYTHON_VERSION)
 PYTHON_SOURCE_DIRECTORY ?= $(PYTHON_BUILD_DIRECTORY)/$(PYTHON_NAME)
 PYTHON_PREFIX ?= $(realpath $(PYTHON_BUILD_DIRECTORY))/$(PYTHON_NAME)-install
@@ -103,4 +107,4 @@ clean-python-virtualenv:
 	$(RM) -r $(VENV_DIRECTORY) virtualenv
 
 $(PYTHON_BUILD_DIRECTORY) $(VENV_BUILD_DIRECTORY):
-	$(MKDIR) --parent $@
+	$(MKDIR) -p $@
