@@ -9,13 +9,13 @@ packageskel is a no frills simple python skeleton project maker. This project st
 Install 
 ===
 
-pip install packageskel 
+```pip install packageskel``` 
 
 or install from source:
 
 Clone this file and then do:
 
-python setup.py install 
+```python setup.py install``` 
 
 Usage
 ===
