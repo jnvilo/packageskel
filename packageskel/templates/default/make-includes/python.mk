@@ -13,15 +13,28 @@ GIT = /usr/bin/git
 LN = /bin/ln
 MAKE = /usr/bin/make
 MKDIR = `which mkdir`
-PYTHON = /usr/local/bin/python
+PYTHON = /usr/bin/python
 TAR = `which tar`
 VENV = /usr/bin/virtualenv
-WGET = /usr/local/bin/wget  $(WGET_OPTIONS)
+
+
+
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)
+	WGET = /usr/bin/wget $(WGET_OPTIONS)
+	PYTHON=/usr/bin/python
+endif
+ifeq ($(UNAME_S),Darwin)
+	WGET = /usr/local/bin/wget $(WGET_OPTIONS)
+	PYTHON = /usr/local/bin/python
+endif 
+
+#WGET = /usr/local/bin/wget  $(WGET_OPTIONS)
 XARGS = /usr/bin/xargs
 
-CPPFLAGS="-I$(brew --prefix openssl)/include" 
-LDFLAGS="-L$(brew --prefix openssl)/lib" 
-
+#CPPFLAGS="-I$(brew --prefix openssl)/include" 
+#LDFLAGS="-L$(brew --prefix openssl)/lib" 
 
 # Use METHOD=git to check only files in the Git index or working tree
 METHOD = find
@@ -32,7 +45,7 @@ else ifeq ($(METHOD),find)
 endif
 
 #PYTHON_VERSION ?= $(shell $(PYTHON) --version | cut -d ' ' -f 2 | cut -d '.' -f 1-3)
-PYTHON_VERSION=3.7.0
+PYTHON_VERSION=3.7.2
 PYTHON_NAME ?= Python-$(PYTHON_VERSION)
 PYTHON_SOURCE_DIRECTORY ?= $(PYTHON_BUILD_DIRECTORY)/$(PYTHON_NAME)
 PYTHON_PREFIX ?= $(realpath $(PYTHON_BUILD_DIRECTORY))/$(PYTHON_NAME)-install
