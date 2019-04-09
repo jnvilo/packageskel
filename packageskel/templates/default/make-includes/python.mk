@@ -8,33 +8,27 @@ endif
 
 BUILD_DIRECTORY ?= build
 
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	WGET = /usr/bin/wget $(WGET_OPTIONS)
+	TAR = /bin/tar
+	VENV = /usr/bin/virtualenv
+endif
+ifeq ($(UNAME_S),Darwin)
+	WGET = /usr/local/bin/wget $(WGET_OPTIONS)
+	TAR = /usr/bin/tar
+	VENV = /usr/local/bin/virtualenv
+endif
+
+
+
 FIND = /usr/bin/find
 GIT = /usr/bin/git
 LN = /bin/ln
 MAKE = /usr/bin/make
-MKDIR = `which mkdir`
+MKDIR = /bin/mkdir
 PYTHON = /usr/bin/python
-TAR = `which tar`
-VENV = /usr/bin/virtualenv
-
-
-
-UNAME_S := $(shell uname -s)
-
-ifeq ($(UNAME_S),Linux)
-	WGET = /usr/bin/wget $(WGET_OPTIONS)
-	PYTHON=/usr/bin/python
-endif
-ifeq ($(UNAME_S),Darwin)
-	WGET = /usr/local/bin/wget $(WGET_OPTIONS)
-	PYTHON = /usr/local/bin/python
-endif 
-
-#WGET = /usr/local/bin/wget  $(WGET_OPTIONS)
 XARGS = /usr/bin/xargs
-
-#CPPFLAGS="-I$(brew --prefix openssl)/include" 
-#LDFLAGS="-L$(brew --prefix openssl)/lib" 
 
 # Use METHOD=git to check only files in the Git index or working tree
 METHOD = find
@@ -44,8 +38,7 @@ else ifeq ($(METHOD),find)
 	python_files_run = $(FIND) . -type f -name '*.py' -exec printf '%s\0' {} + | $(XARGS) -0
 endif
 
-#PYTHON_VERSION ?= $(shell $(PYTHON) --version | cut -d ' ' -f 2 | cut -d '.' -f 1-3)
-PYTHON_VERSION=3.7.2
+PYTHON_VERSION ?= $(shell $(PYTHON) --version | cut -d ' ' -f 2 | cut -d '.' -f 1-3)
 PYTHON_NAME ?= Python-$(PYTHON_VERSION)
 PYTHON_SOURCE_DIRECTORY ?= $(PYTHON_BUILD_DIRECTORY)/$(PYTHON_NAME)
 PYTHON_PREFIX ?= $(realpath $(PYTHON_BUILD_DIRECTORY))/$(PYTHON_NAME)-install
