@@ -18,7 +18,7 @@ import logging
 import logging.config
 import re
 
-from future.utils import PY3
+
 
 
 LOGGING_CONFIG = { 
