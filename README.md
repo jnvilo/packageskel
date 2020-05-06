@@ -20,6 +20,21 @@ Clone this file and then do:
 Usage
 ===
 
+RHEL/Centos/Fedora
+====
+
+Skeleton code created by packageskel provides a Makefile to build different versions of python to code and test with.This an be set in configurations.ml. 
+
+However in order for it to build python properly we need a few libraries. Install them as follows:
+
+```
+yum -y install npm gcc sqlite-devel openssl-devel libtiff-devel openjpeg-devel \
+openjpeg2-devel libjpeg-turbo-devel  zlib-devel  freetype-devel lcms-devel \
+lcms2-devel libexif-devel libffi-devel
+```
+
+
+
 ```packageskel mymodule```
 
 This will create a new mymodule 
