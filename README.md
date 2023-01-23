@@ -1,3 +1,5 @@
+**This is no longer maintained since I have moved on to using cookiecutter**
+
 packageskel - A python project skeleton maker.
 ===
 
